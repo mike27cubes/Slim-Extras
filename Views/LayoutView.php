@@ -62,7 +62,7 @@ namespace Slim\Extras\Views;
  *
  * @package Slim
  * @author  Hidayet Dogan
- * @link    http://hi.do 
+ * @link    http://hi.do
  */
 class LayoutView extends \Slim\View
 {
@@ -195,11 +195,15 @@ class LayoutView extends \Slim\View
      */
     public function render($template)
     {
-        $this->setTemplate($template);
-        extract($this->data);
+        $templatePathname = $this->getTemplatePathname($template);
+        if (!is_file($templatePathname)) {
+            throw new \RuntimeException("View cannot render `$template` because the template does not exist");
+        }
+
+        $data = array_merge($this->data->all(), (array) $data);
+        extract($data);
         ob_start();
-        require $this->templatePath;
-        $content_for_layout = ob_get_clean();
+        require $templatePathname;
 
         if ($this->autoLayout)
         {
