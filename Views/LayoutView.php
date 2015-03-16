@@ -193,7 +193,7 @@ class LayoutView extends \Slim\View
      * @return string
      * @throws RuntimeException
      */
-    public function render($template)
+    public function render($template, $data = null)
     {
         $templatePathname = $this->getTemplatePathname($template);
         if (!is_file($templatePathname)) {
