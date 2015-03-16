@@ -92,6 +92,7 @@ class LayoutView extends \Slim\View
      */
     public function __construct($config = array())
     {
+        parent::__construct();
         if (isset($config['layout.auto']))
         {
             $this->setAutoLayout($config['layout.auto']);
