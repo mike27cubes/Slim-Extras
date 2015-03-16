@@ -204,6 +204,7 @@ class LayoutView extends \Slim\View
         extract($data);
         ob_start();
         require $templatePathname;
+        $content_for_layout = ob_get_clean();
 
         if ($this->autoLayout)
         {
